@@ -1,0 +1,37 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.forms import ValidationError
+from .models import Dish, Cook
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+class CookCreationForm(UserCreationForm):
+    years_of_experience = forms.IntegerField(
+        required=True,
+        validators=[MinValueValidator(0), MaxValueValidator(50)]
+    )
+    class Meta(UserCreationForm.Meta):
+        model = Cook
+        fields = UserCreationForm.Meta.fields + ("years_of_experience",)
+
+
+class CookExperienceUpdateForm(forms.ModelForm):
+    years_of_experience = forms.IntegerField(
+        required=True,
+        validators=[MinValueValidator(0), MaxValueValidator(50)]
+    )
+    class Meta(UserCreationForm.Meta):
+        model = Cook
+        fields = ("years_of_experience",)
+
+
+class DishForm(forms.ModelForm):
+    cooks = forms.ModelMultipleChoiceField(
+        queryset=Cook.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    class Meta:
+        model = Dish
+        fields = "__all__"
