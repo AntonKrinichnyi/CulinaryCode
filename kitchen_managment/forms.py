@@ -25,6 +25,16 @@ class CookExperienceUpdateForm(forms.ModelForm):
         fields = ("years_of_experience",)
 
 
+class CookUsernameSearchForm(forms.Form):
+    username = forms.CharField(max_length=150,
+                               required=False,
+                               label="",
+                               widget=forms.TextInput(
+                                   attrs={"placeholder": "Search by username"}
+                               )
+                               )
+
+
 class DishForm(forms.ModelForm):
     cooks = forms.ModelMultipleChoiceField(
         queryset=Cook.objects.all(),
@@ -35,3 +45,23 @@ class DishForm(forms.ModelForm):
     class Meta:
         model = Dish
         fields = "__all__"
+
+
+class DishNameSearchForm(forms.Form):
+    name = forms.CharField(max_length=255,
+                           required=False,
+                           label="",
+                           widget=forms.TextInput(
+                               attrs={"placeholder": "Search by name"}
+                               )
+                           )
+
+
+class DishTypeNameSearchForm(forms.Form):
+    name = forms.CharField(max_length=255,
+                           required=False,
+                           label="",
+                           widget=forms.TextInput(
+                               attrs={"placeholder": "Search by name"}
+                            )
+                           )
