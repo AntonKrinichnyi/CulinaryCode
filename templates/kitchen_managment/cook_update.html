@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} dishtype</h1>
+  <h1>Update years of experience</h1>
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form }}

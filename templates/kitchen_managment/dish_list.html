@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="service_section">
+  <div class="search_form layout_padding" style="padding-left: 550px;">
+    <form
+      action=""
+      method="get"
+      class="form-inline"
+    >
+      {{ search_form }}
+      <input
+        type="submit"
+        class="btn btn-primary"
+        value="Search"
+      >
+    </form>
+  </div>
+  <div class="container">
+    <div class="">
+      {% if dish_list %}
+      <div class="card-deck">
+        {% for dish in dish_list %}
+        <a
+          href="{% url 'kitchen_managment:dish-detail' pk=dish.id %}"
+          class="card"
+        >
+          <img
+            class="card-img-top"
+            src="{% static 'images/card-item-3.png' %}"
+            alt="Card image cap"
+          >
+          <div class="card-body">
+            <h5
+              class="card-title"
+            >
+              {{ dish.name }}
+            </h5>
+            <p class="card-text">
+              {{ dish.description}}
+            </p>
+            <br>
+            <p class="card-text">
+                {{ dish.price }}
+            </p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>The list is empty, you dont add dishes</p>
+      {% endif %}
+      <a
+        href="{% url 'kitchen_managment:dish-create' %}"
+        class="btn btn-primary link-to-page"
+      >
+        Create
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -13,7 +13,6 @@ from kitchen_managment.forms import (CookCreationForm,
 from .models import Dish, DishType, Cook
 
 
-@login_required
 def index(request):
     num_cooks = Cook.objects.count()
     num_dish = Dish.objects.count()
@@ -34,14 +33,14 @@ def index(request):
 
 class DishTypeListView(LoginRequiredMixin, generic.ListView):
     model = DishType
-    context_object_name = "dishtype-list"
+    context_object_name = "dishtype_list"
     template_name = "kitchen_managment/dishtype_list.html"
     paginate_by = 10
     queryset = DishType.objects.all()
     
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(DishTypeListView, self).get_context_data(**kwargs)
-        name = self.request.GET.get("name", "")
+        name = self.request.GET.get("name", "",)
         context["search_form"] = DishTypeNameSearchForm(
             initial={"name": name})
         return context
@@ -78,8 +77,7 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(DishListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
-        context["search_form"] = DishNameSearchForm(
-            initial={"name": name})
+        context["search_form"] = DishNameSearchForm(initial={"name": name})
         return context
 
     def get_queryset(self):
@@ -127,35 +125,36 @@ class CookListView(LoginRequiredMixin, generic.ListView):
         if form.is_valid():
             return self.queryset.filter(
                 username__icontains=form.cleaned_data["username"]
-            )
+            ) 
 
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
-    queryset = Cook.objects.all().prefetch_related("dish__dishtype")
+    queryset = Cook.objects.all().prefetch_related("dishes__dishtype")
 
 
 class CookCreateView(LoginRequiredMixin, generic.CreateView):
     model = Cook
     form_class = CookCreationForm
+    template_name = "kitchen_managment/cook_create.html"
+    success_url = reverse_lazy("kitchen_managment:cook-list")
 
 
 class CookExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
+    template_name = "kitchen_managment/cook_update.html"
     success_url = reverse_lazy("kitchen_managment:cook-list")
     form_class = CookExperienceUpdateForm
 
 
 class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
-    success_url = reverse_lazy("")
+    success_url = reverse_lazy("kitchen_managment:cook-list")
 
 @login_required
 def toggle_assign_to_dish(request, pk):
     cook = Cook.objects.get(id=request.user.id)
-    if (
-        Dish.objects.get(id=pk) in cook.dishes.all()
-    ):
+    if (Dish.objects.get(id=pk) in cook.dishes.all()):
         cook.dishes.remove(pk)
     else:
         cook.dishes.add(pk)

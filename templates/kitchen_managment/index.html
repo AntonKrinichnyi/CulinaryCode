@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="service_section layout_padding ">
+  <div class="container">
+    <div class=" layout_padding2">
+      <div class="card-deck">
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="{% static 'images/card-item-1.png' %}"
+            alt="Card image cap"
+          >
+          <div class="card-body">
+            <h5 class="card-title">Cooks</h5>
+            <p class="card-text">
+              Currently, there are {{ num_cooks }} cooks working in our
+              kitchen who will make your dishes exceptionally delicious and exquisite.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="{% static 'images/card-item-2.png' %}"
+            alt="Card image cap"
+          >
+          <div class="card-body">
+            <h5 class="card-title">Dishes</h5>
+            <p class="card-text">
+                Currently, our menu features {{ num_dish }} dishes, each of which
+                is a masterpiece that will please the taste of anyone.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="{% static 'images/card-item-3.png' %}"
+            alt="Card image cap"
+          >
+          <div class="card-body">
+            <h5 class="card-title">Dish Types</h5>
+            <p class="card-text">
+                Currently, our restaurant offers {{ num_dishtype }} types of dishes, but we are not standing still and are ready to grow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

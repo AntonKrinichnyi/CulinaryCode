@@ -12,7 +12,8 @@ class CookCreationForm(UserCreationForm):
     )
     class Meta(UserCreationForm.Meta):
         model = Cook
-        fields = UserCreationForm.Meta.fields + ("years_of_experience",)
+        fields = UserCreationForm.Meta.fields + ("years_of_experience",
+                                                 "email")
 
 
 class CookExperienceUpdateForm(forms.ModelForm):
@@ -39,7 +40,6 @@ class DishForm(forms.ModelForm):
     cooks = forms.ModelMultipleChoiceField(
         queryset=Cook.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
     )
 
     class Meta:
