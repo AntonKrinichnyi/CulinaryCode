@@ -90,6 +90,14 @@ class DishListView(LoginRequiredMixin, generic.ListView):
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
     
+    def toggle_assign_to_dish(request, pk):
+        cook = Cook.objects.get(id=request.user.id)
+        if (Dish.objects.get(id=pk) in cook.dishes.all()):
+            cook.dishes.remove(pk)
+        else:
+            cook.dishes.add(pk)
+        return HttpResponseRedirect(reverse_lazy("kitchen_managment:dish-detail", args=[pk]))
+
 class DishCreateView(LoginRequiredMixin, generic.CreateView):
     model = Dish
     success_url = reverse_lazy("kitchen_managment:dish-list")
@@ -151,11 +159,15 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen_managment:cook-list")
 
-@login_required
-def toggle_assign_to_dish(request, pk):
-    cook = Cook.objects.get(id=request.user.id)
-    if (Dish.objects.get(id=pk) in cook.dishes.all()):
-        cook.dishes.remove(pk)
-    else:
-        cook.dishes.add(pk)
-    return HttpResponseRedirect(reverse_lazy("kitchen_managment:dish-detail", args=[pk]))
+
+class ToggleAssignToDishView(LoginRequiredMixin, generic.View):
+    @staticmethod
+    def get(request, pk):
+        cook = Cook.objects.get(id=request.user.id)
+        if (Dish.objects.get(id=pk) in cook.dishes.all()):
+            cook.dishes.remove(pk)
+        else:
+            cook.dishes.add(pk)
+        return HttpResponseRedirect(
+            reverse_lazy("kitchen_managment:dish-detail",
+                                                 args=[pk]))

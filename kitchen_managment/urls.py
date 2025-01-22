@@ -15,7 +15,7 @@ from .views import (
     DishTypeCreateView,
     DishTypeUpdateView,
     DishTypeDeleteView,
-    toggle_assign_to_dish,
+    ToggleAssignToDishView,
 )
 
 urlpatterns = [
@@ -36,21 +36,21 @@ urlpatterns = [
     path("dish/", DishListView.as_view(), name="dish-list",),
     path("dish/<int:pk>/", DishDetailView.as_view(), name="dish-detail",),
     path("dish/create/", DishCreateView.as_view(), name="dish-create",),
-    path("dish/<int:pk>/update", DishUpdateView.as_view(), name="dish-update",),
-    path("dish/<int:pk>/delete", DishDeleteView.as_view(), name="dish-delete",),
+    path("dish/<int:pk>/update/", DishUpdateView.as_view(), name="dish-update",),
+    path("dish/<int:pk>/delete/", DishDeleteView.as_view(), name="dish-delete",),
     path(
        "dish/<int:pk>/toggle-assign/",
-       toggle_assign_to_dish,
+       ToggleAssignToDishView.as_view(),
        name="toggle-dish-assign",
     ),
     path("cook/", CookListView.as_view(), name="cook-list",),
     path("cook/<int:pk>/", CookDetailView.as_view(), name="cook-detail"),
     path("cook/create/", CookCreateView.as_view(), name="cook-create",),
     path(
-        "cook/<int:pk>/update",
+        "cook/<int:pk>/update/",
         CookExperienceUpdateView.as_view(),
         name="cook-update",),
-    path("cook/<int:pk>/delete", CookDeleteView.as_view(), name="cook-delete"),
+    path("cook/<int:pk>/delete/", CookDeleteView.as_view(), name="cook-delete"),
 ]
 
 app_name = "kitchen_managment"

@@ -15,8 +15,7 @@
   <p>Description: {{ dish.description }}</p>
   <h1>
     Cooks
-
-    {% if car in user.cars.all %}
+    {% if dish in user.dish.all %}
       <a href="{% url 'kitchen_managment:toggle-dish-assign' pk=dish.id %}" class="btn btn-danger link-to-page">
         Delete me from this dish
       </a>
@@ -25,12 +24,11 @@
         Assign me from this dish
       </a>
     {% endif %}
-
   </h1>
   <hr>
   <ul>
     {% for cook in dish.cooks.all %}
-      <li>{{ kitchen_managment.username }} ({{ kitchen_managment.first_name }} {{ kitchen_managment.last_name }})</li>
+      <li>{{ cook.username }} ({{ cook.first_name }} {{ cook.last_name }})</li>
     {% endfor %}
   </ul>
 {% endblock %}
