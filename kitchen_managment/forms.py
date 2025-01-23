@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ValidationError
-from .models import Dish, Cook
+from kitchen_managment.models import Dish, Cook
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 

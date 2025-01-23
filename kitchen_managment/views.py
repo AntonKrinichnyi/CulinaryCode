@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from kitchen_managment.forms import (CookCreationForm,
@@ -10,7 +9,7 @@ from kitchen_managment.forms import (CookCreationForm,
                                      DishForm,
                                      DishNameSearchForm,
                                      DishTypeNameSearchForm)
-from .models import Dish, DishType, Cook
+from kitchen_managment.models import Dish, DishType, Cook
 
 
 def index(request):

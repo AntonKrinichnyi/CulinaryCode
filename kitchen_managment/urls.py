@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (
+from kitchen_managment.views import (
     index,
     CookCreateView,
     CookDetailView,
