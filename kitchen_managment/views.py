@@ -161,7 +161,7 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class ToggleAssignToDishView(LoginRequiredMixin, generic.View):
     @staticmethod
-    def get(request, pk):
+    def post(request, pk):
         cook = Cook.objects.get(id=request.user.id)
         if (Dish.objects.get(id=pk) in cook.dishes.all()):
             cook.dishes.remove(pk)
