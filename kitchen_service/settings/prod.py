@@ -20,7 +20,7 @@ DATABASES = {
         "USER": os.environ["POSTGRASE_USER"],
         "PASSWORD": os.environ["POSTGRASE_PASSWORD"],
         "HOST": os.environ["POSTGRASE_HOST"],
-        "PORT": os.environ["POSTGRES_DB_PORT"],
+        "PORT": os.environ["POSTGRASE_DB_PORT"],
         "OPTIONS": {"sslmode": "require"},
     }
 }
