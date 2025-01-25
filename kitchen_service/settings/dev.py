@@ -1,7 +1,7 @@
 from kitchen_service.settings.base import *
 
 
-DEBUG = os.getenv("DJANGO_DEBUG", "") != "False"
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
