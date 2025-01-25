@@ -37,7 +37,6 @@ class Dish(models.Model):
     dishtype = models.ForeignKey(DishType, on_delete=models.CASCADE)
     cooks = models.ManyToManyField(Cook,
                                    related_name="dishes",
-                                   null=True,
                                    blank=True)
     
     
