@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kitchen_service.settings.prod")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kitchen_service.settings.prod.py")
 
 application = get_wsgi_application()
