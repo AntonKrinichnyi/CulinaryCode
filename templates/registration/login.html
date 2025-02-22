@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="contact_section layout_padding">
+  <div class="container">
+    <h2 class="font-weight-bold">
+      Login
+    </h2>
+    {% if form.errors %}
+      <p style="color: darkorange">
+        Your username and password didn't match. Please try again.
+      </p>
+    {% endif %}
+    {% if next %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+    <div class="row">
+      <div class="col-md-8 mr-auto">
+        <form
+          action="{% url 'login' %}"
+          method="post"
+          class="contact_form-container"
+        >
+        {% csrf_token %}
+        <div>
+          <p>Username</p>
+          {{ form.username }}
+        </div>
+        <div>
+          <p>Password</p>
+          {{ form.password }}
+        </div>
+        <div class="mt-5">
+          <input type="submit" value="Login" class="btn btn-primary" />
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

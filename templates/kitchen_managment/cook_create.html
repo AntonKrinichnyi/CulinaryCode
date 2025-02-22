@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="contact_section layout_padding">
+  <div class="container">
+    <h1>Create cook</h1>
+    <div class="row">
+      <div class="col-md-8 mr-auto">
+        <form
+          action=""
+          method="post"
+          novalidate
+        >
+          {% csrf_token %}
+          <div>
+            <p>Username</p>
+            {{ form.username }}
+          </div>
+          <span class="errors">{{ form.username.errors }}</span>
+          <div>
+            <p>First name</p>
+            {{ form.first_name }}
+          </div>
+          <div>
+            <p>Last name</p>
+            {{ form.last_name }}
+          </div>
+          <div>
+            <p>Email</p>  
+            {{ form.email }}
+          </div>
+          <span class="errors">{{ form.email.errors }}</span>
+          <div>
+            <p>Years of experience</p>
+            {{ form.years_of_experience }}
+          </div>
+          <div>
+            <p>Password</p>
+            {{ form.password1}}
+          </div>
+          <span class="errors">{{ form.password1.errors }}</span>
+          <div>
+            <p>Repeat password</p>
+            {{ form.password2 }}
+          </div>
+          <span class="errors">{{ form.password2.errors }}</span>
+          <div class="mt-5">
+            <input
+              type="submit"
+              value="Submit"
+              class="btn btn-primary"
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

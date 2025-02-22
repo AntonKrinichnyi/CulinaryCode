@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="">
+  <div class="search_form layout_padding-bottom">
+    <form
+      action=""
+      method="get"
+      class="search_form_txt"
+    >
+      {{ search_form }}
+      <input
+        type="submit"
+        class="search_form_btn"
+        value="Search"
+      >
+    </form>
+  </div>    
+  {% if dishtype_list %}
+  <br>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    {% for dishtype in dishtype_list %}
+    <tr>
+      <td>{{ dishtype.name }}</td>
+      <td>
+        <a href="{% url 'kitchen_managment:dishtype-update' pk=dishtype.id %}">
+          Update
+        </a>
+      </td>
+      <td>
+        <a
+          style="color: darkorange"
+          href="{% url 'kitchen_managment:dishtype-delete' pk=dishtype.id %}"
+        >
+          Delete
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>There are no dishtypes in the service.</p>
+  {% endif %}
+  <a
+    href="{% url 'kitchen_managment:dishtype-create' %}"
+    class="btn btn-primary link-to-page"
+  >
+    Create
+  </a>
+</section>
+{% endblock %}
